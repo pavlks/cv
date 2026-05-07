@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavel Sazonov — QA Engineer & Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f5f2ed;
+    --accent: #c84b2f;
+    --accent-light: #f0e8e4;
+    --mid: #6b6560;
+    --rule: #d8d2cb;
+    --tag-bg: #e8e3db;
+    --col-width: 760px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+  }
+  nav .inner {
+    max-width: var(--col-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    gap: 1.5rem;
+  }
+  .nav-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.6rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-print {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .nav-print:hover { opacity: 0.85; }
+
+  /* ── LAYOUT ──────────────────────────────── */
+  .page { max-width: var(--col-width); margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── HERO ────────────────────────────────── */
+  #hero {
+    padding: 4rem 0 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-text {}
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.7rem;
+  }
+  .hero-title {
+    font-size: 1rem;
+    color: var(--mid);
+    font-weight: 400;
+    margin-bottom: 1.4rem;
+  }
+  .hero-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--mid);
+  }
+  .hero-contact a { color: inherit; text-decoration: none; }
+  .hero-contact a:hover { color: var(--accent); }
+  .hero-contact span::before { content: '→ '; color: var(--accent); }
+
+  .avatar-wrap {
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--tag-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--rule);
+  }
+  .avatar-placeholder {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem;
+    color: var(--mid);
+    user-select: none;
+  }
+
+  /* ── SECTION COMMON ──────────────────────── */
+  section { padding: 2.4rem 0; border-bottom: 1px solid var(--rule); }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.4rem;
+  }
+
+  /* ── SUMMARY ─────────────────────────────── */
+  #summary p {
+    font-size: 1.0rem;
+    line-height: 1.7;
+    color: #2a2825;
+    max-width: 640px;
+  }
+
+  /* ── SKILLS ──────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+  .skill-group {}
+  .skill-group-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.3rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.4rem;
+  }
+  .tag {
+    background: var(--tag-bg);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.70rem;
+    padding: 0.18rem 0.55rem;
+    color: var(--mid);
+    border: 1px solid var(--rule);
+  }
+
+  /* ── EXPERIENCE ──────────────────────────── */
+  .exp-list { display: flex; flex-direction: column; gap: 2rem; }
+  .exp-item {}
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.15rem;
+  }
+  .exp-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.70rem;
+    color: var(--mid);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .exp-company {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .exp-bullets li {
+    font-size: 0.875rem;
+    color: #3a3835;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.55;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.05em;
+  }
+  .exp-tech {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .exp-divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 1rem 0 0;
+    opacity: 0.5;
+  }
+
+  /* ── PROJECTS ────────────────────────────── */
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .project-card {
+    background: var(--accent-light);
+    border: 1px solid var(--rule);
+    padding: 1rem 1.1rem;
+  }
+  .project-card h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+  }
+  .project-card p {
+    font-size: 0.8rem;
+    color: var(--mid);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── CONTACT ─────────────────────────────── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 2rem;
+  }
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 0.1rem;
+  }
+  .contact-val {
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--mid);
+  }
+
+  /* ── PRINT ───────────────────────────────── */
+  @media print {
+    @page { margin: 1.5cm 1.8cm; size: A4; }
+    nav, .nav-print, footer { display: none !important; }
+    body { background: #fff; font-size: 11pt; }
+    :root { --paper: #fff; --accent-light: #fdf0ed; }
+    #hero { padding-top: 0; }
+    section { page-break-inside: avoid; }
+    .exp-item { page-break-inside: avoid; }
+    .project-grid { grid-template-columns: 1fr 1fr; }
+    a { color: inherit !important; }
+  }
+
+  @media (max-width: 600px) {
+    #hero { grid-template-columns: 1fr; }
+    .avatar-wrap { display: none; }
+    .project-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="nav-name">Pavel Sazonov</span>
+    <ul class="nav-links">
+      <li><a href="#summary">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-print" onclick="window.print()">⎙ Print PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Bar, Montenegro</p>
+      <h1>Pavel<br>Sazonov</h1>
+      <p class="hero-title">QA Engineer &amp; ML / NLP Data Scientist</p>
+      <div class="hero-contact">
+        <span><a href="mailto:brabalagg@gmail.com">brabalagg@gmail.com</a></span>
+        <span>555-1234 (WhatsApp / Telegram)</span>
+        <span>Bar, Montenegro</span>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <span class="avatar-placeholder">AH</span>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary">
+    <p class="section-label">Profile</p>
+    <p>Senior QA Engineer and ML/NLP Data Scientist with over four years of combined experience in backend test automation, database quality assurance, and applied machine learning. Specialises in high-performance data platforms, distributed systems, and NLP pipelines. Proven track record across SaaS database products, media analytics, healthcare AI, and web-scale data engineering. Based in Montenegro; experienced working fully remote across multiple time zones.</p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Core Skills</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-name">QA &amp; Testing</div>
+        <div class="skill-tags">
+          <span class="tag">PyTest</span>
+          <span class="tag">Test Automation</span>
+          <span class="tag">TDD</span>
+          <span class="tag">API Testing</span>
+          <span class="tag">SQL Engine QA</span>
+          <span class="tag">Regression Analysis</span>
+          <span class="tag">Performance Testing</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Data &amp; ML</div>
+        <div class="skill-tags">
+          <span class="tag">NLP</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">TensorFlow / Keras</span>
+          <span class="tag">CatBoost / XGBoost</span>
+          <span class="tag">spaCy / NLTK</span>
+          <span class="tag">Pandas / NumPy</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Data Engineering</div>
+        <div class="skill-tags">
+          <span class="tag">Apache Iceberg</span>
+          <span class="tag">Apache Spark</span>
+          <span class="tag">SQL</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQLAlchemy</span>
+          <span class="tag">Weaviate</span>
+          <span class="tag">DuckDB</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Infrastructure &amp; DevOps</div>
+        <div class="skill-tags">
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Docker</span>
+          <span class="tag">AWS (EC2/S3/EKS)</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">Kafka</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Languages</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Bash</span>
+          <span class="tag">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Tools &amp; Platforms</div>
+        <div class="skill-tags">
+          <span class="tag">GitHub</span>
+          <span class="tag">Jira / Confluence</span>
+          <span class="tag">Zabbix</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Linux</span>
+          <span class="tag">FileMaker</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Experience</p>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">QA Engineer</span>
+          <span class="exp-period">Dec 2024 – Present</span>
+        </div>
+        <div class="exp-company">Scailium (formerly SQream)</div>
+        <ul class="exp-bullets">
+          <li>Develop and maintain automated backend and database test suites using Python and PyTest within a proprietary testing framework.</li>
+          <li>Design detailed test plans for new features using TDD principles in direct collaboration with developers.</li>
+          <li>Perform backend, API, SQL engine, and ML/Data Science platform testing for a high-performance SaaS database product.</li>
+          <li>Debug complex test failures, investigate regressions, and monitor nightly runs to ensure release quality.</li>
+          <li>Validate integration of custom Data Science and machine learning models within the database ecosystem.</li>
+          <li>Review pull requests with quality-focused feedback on implementation, testability, and edge cases.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tag">Python</span><span class="tag">PyTest</span><span class="tag">SQL</span>
+          <span class="tag">Apache Iceberg</span><span class="tag">Apache Spark</span><span class="tag">REST APIs</span>
+          <span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">SRE</span>
+          <span class="exp-period">Sep 2024 – Dec 2024</span>
+        </div>
+        <div class="exp-company">Qligent Corp. · Remote</div>
+        <ul class="exp-bullets">
+          <li>Site Reliability Engineering for broadcast monitoring infrastructure, managing Kubernetes-based deployments.</li>
+          <li>Worked with Apache Kafka event streaming and distributed systems observability.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tag">Kubernetes</span><span class="tag">Kafka</span><span class="tag">SRE</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">QA Manager → QA Engineer</span>
+          <span class="exp-period">Jan 2023 – Sep 2024</span>
+        </div>
+        <div class="exp-company">Alar Studios · Budva, Montenegro</div>
+        <ul class="exp-bullets">
+          <li><strong>As QA Manager (Mar – Sep 2024):</strong> Led a team of QA engineers, oversaw test planning, execution and reporting, conducted technical interviews and onboarded new hires, reported directly to business owners.</li>
+          <li>Recreated client environments to test software stability and reproduce real-world load conditions for performance testing.</li>
+          <li><strong>As QA Engineer (Jan 2023 – Feb 2024):</strong> Automated testing for SQream — a GPU-accelerated RDBMS for big data analytics — covering fundamental algorithms, scalability, stability, and data structures.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Bash</span><span class="tag">Test Automation</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">ML &amp; NLP Data Scientist</span>
+          <span class="exp-period">Dec 2022 – Jan 2025</span>
+        </div>
+        <div class="exp-company">FindDataLab (Indext Data Lab) · Remote</div>
+        <ul class="exp-bullets">
+          <li>Large-scale Spanish-language database de-duplication using NLP and clustering techniques.</li>
+          <li>Trends extraction tool for an Australian media holding, leveraging spaCy and scikit-learn pipelines.</li>
+          <li>Personalised medication recommendation system for a medical institution using TensorFlow/Keras.</li>
+          <li>ChatGPT-powered PDF question-answering assistant built with Weaviate vector search and spaCy.</li>
+          <li>Predictive modelling for horse race outcomes using CatBoost with structured tabular data.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tag">spaCy</span><span class="tag">NLTK</span><span class="tag">scikit-learn</span>
+          <span class="tag">TensorFlow</span><span class="tag">CatBoost</span><span class="tag">Weaviate</span>
+          <span class="tag">Pandas</span><span class="tag">SQLAlchemy</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">DevOps Engineer</span>
+          <span class="exp-period">Mar 2022 – Dec 2022</span>
+        </div>
+        <div class="exp-company">Alar Studios · Budva, Montenegro</div>
+        <ul class="exp-bullets">
+          <li>Maintained and modernised staging infrastructure; supported Dev and QA teams, authored documentation.</li>
+          <li>Managed AWS services (EC2, S3, EKS, CloudTrail, CloudWatch, VPC) and IaC with Ansible and CloudFormation.</li>
+          <li>Operated CI/CD pipelines with Jenkins; monitoring with Zabbix; containerisation with Kubernetes and Docker.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">AWS</span>
+          <span class="tag">Ansible</span><span class="tag">Jenkins</span><span class="tag">Bash</span><span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Data Engineer</span>
+          <span class="exp-period">Jul 2021 – Feb 2022</span>
+        </div>
+        <div class="exp-company">Alar Studios · Budva, Montenegro</div>
+        <ul class="exp-bullets">
+          <li>Backend data engineering for a B2B embeddable web application serving over 5 million users — a mental health assistance platform.</li>
+          <li>Designed and optimised database schemas, performed migrations, implemented reporting and refactored SQL functions.</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Freelance Data Scientist</span>
+          <span class="exp-period">Jun 2020 – Feb 2021</span>
+        </div>
+        <div class="exp-company">Self-employed · Cancún, Mexico</div>
+        <ul class="exp-bullets">
+          <li>Built web applications with Django; automation scripts with Selenium and BeautifulSoup; async API clients with aiohttp/asyncio.</li>
+          <li>Completed Data Analysis with Python (Computer Science Center) and Introduction to Data Analysis (Mail.ru Group).</li>
+        </ul>
+        <div class="exp-tech">
+          <span class="tag">Django</span><span class="tag">Selenium</span><span class="tag">Pandas</span>
+          <span class="tag">NumPy</span><span class="tag">matplotlib</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SELECTED PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Selected Projects</p>
+    <div class="project-grid">
+      <div class="project-card">
+        <h4>PDF Q&amp;A Assistant</h4>
+        <p>ChatGPT-powered assistant that answers questions by searching information within PDF documents using vector search.</p>
+        <div class="exp-tech"><span class="tag">Weaviate</span><span class="tag">spaCy</span><span class="tag">SQLAlchemy</span></div>
+      </div>
+      <div class="project-card">
+        <h4>Medication Recommendation System</h4>
+        <p>Personalised recommendation engine for a medical institution, processing clinical text with deep learning.</p>
+        <div class="exp-tech"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">spaCy</span></div>
+      </div>
+      <div class="project-card">
+        <h4>Media Trends Extraction</h4>
+        <p>NLP pipeline for extracting trending topics from a large Australian media holding's content corpus.</p>
+        <div class="exp-tech"><span class="tag">spaCy</span><span class="tag">scikit-learn</span><span class="tag">Pandas</span></div>
+      </div>
+      <div class="project-card">
+        <h4>Order Management Database</h4>
+        <p>Custom database system for a high-volume e-commerce operation, reducing order-to-dispatch time from 4 months to 3 weeks for 70–100 daily orders.</p>
+        <div class="exp-tech"><span class="tag">FileMaker</span><span class="tag">Database Design</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-val"><a href="mailto:brabalagg@gmail.com">brabalagg@gmail.com</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Phone / Messenger</span>
+        <span class="contact-val">555-1234 (WhatsApp &amp; Telegram)</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <span class="contact-val">Bar, Montenegro</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Availability</span>
+        <span class="contact-val">Open to remote opportunities globally</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Pavel Sazonov &nbsp;·&nbsp; QA Engineer &amp; Data Scientist &nbsp;·&nbsp; Bar, Montenegro
+</footer>
+
+</body>
+</html>
