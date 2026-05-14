@@ -1,657 +1,1228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pavel Sazonov — QA Engineer & Data Scientist</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pavel Sazonov — Principal Business Architect & Strategic Advisor</title>
+<meta name="description" content="Pavel Sazonov — Principal Business Architect & Strategic Advisor. Turning vague goals into concrete initiatives, priorities, dependencies, and delivery roadmaps." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+
 <style>
   :root {
-    --ink: #0f0f0f;
-    --paper: #f5f2ed;
-    --accent: #c84b2f;
-    --accent-light: #f0e8e4;
-    --mid: #6b6560;
-    --rule: #d8d2cb;
-    --tag-bg: #e8e3db;
-    --col-width: 760px;
+    --bg:           #f8f5ee;
+    --surface:      #ffffff;
+    --surface-soft: #f1ece0;
+    --ink:          #1a2235;
+    --ink-soft:     #3e4a63;
+    --muted:        #6c7385;
+    --primary:      #1a2c52;
+    --accent:       #9c6f3a;
+    --accent-soft:  #c9a36e;
+    --border:       #e4ddcd;
+    --border-soft:  #ece6d7;
+    --shadow-sm:    0 1px 2px rgba(20, 30, 60, 0.04);
+    --shadow-md:    0 1px 3px rgba(20, 30, 60, 0.06), 0 8px 20px rgba(20, 30, 60, 0.05);
+    --radius:       10px;
+    --radius-lg:    14px;
+    --maxw:         1080px;
+    --serif:        'Lora', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; }
 
   body {
-    background: var(--paper);
+    background: var(--bg);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-family: var(--sans);
+    font-size: 16px;
     line-height: 1.6;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ── NAV ─────────────────────────────────── */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(245,242,237,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--rule);
-    padding: 0 2rem;
-  }
-  nav .inner {
-    max-width: var(--col-width);
-    margin: 0 auto;
+  a { color: var(--primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s ease, color .15s ease; }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ===== Floating action bar (hidden in PDF/print) ===== */
+  .action-bar {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 50;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 52px;
-    gap: 1.5rem;
+    gap: 10px;
   }
-  .nav-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.05rem;
+  .btn {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
     letter-spacing: 0.01em;
-    color: var(--ink);
-    white-space: nowrap;
-  }
-  .nav-links {
-    display: flex;
-    gap: 1.6rem;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--mid);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-print {
-    background: var(--accent);
     color: #fff;
-    border: none;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.4rem 0.9rem;
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 10px 16px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-  }
-  .nav-print:hover { opacity: 0.85; }
-
-  /* ── LAYOUT ──────────────────────────────── */
-  .page { max-width: var(--col-width); margin: 0 auto; padding: 0 2rem 4rem; }
-
-  /* ── HERO ────────────────────────────────── */
-  #hero {
-    padding: 4rem 0 3rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: start;
-    gap: 2.5rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .hero-text {}
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.6rem;
-  }
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.4rem, 5vw, 3.2rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 0.7rem;
-  }
-  .hero-title {
-    font-size: 1rem;
-    color: var(--mid);
-    font-weight: 400;
-    margin-bottom: 1.4rem;
-  }
-  .hero-contact {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.4rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--mid);
-  }
-  .hero-contact a { color: inherit; text-decoration: none; }
-  .hero-contact a:hover { color: var(--accent); }
-  .hero-contact span::before { content: '→ '; color: var(--accent); }
-
-  .avatar-wrap {
-    width: 180px;
-    height: 220px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    overflow: hidden;
-    background: var(--tag-bg);
-    display: flex;
+    box-shadow: var(--shadow-md);
+    transition: background .15s ease, transform .1s ease;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    border: 1px solid var(--rule);
+    gap: 8px;
   }
-  .avatar-placeholder {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.6rem;
-    color: var(--mid);
-    user-select: none;
-  }
+  .btn:hover { background: #243a6b; }
+  .btn:active { transform: translateY(1px); }
+  .btn svg { width: 16px; height: 16px; }
 
-  /* ── SECTION COMMON ──────────────────────── */
-  section { padding: 2.4rem 0; border-bottom: 1px solid var(--rule); }
-  section:last-child { border-bottom: none; }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.4rem;
+  /* ===== Page container ===== */
+  #cv {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 56px 40px 48px;
   }
 
-  /* ── SUMMARY ─────────────────────────────── */
-  #summary p {
-    font-size: 1.0rem;
-    line-height: 1.7;
-    color: #2a2825;
-    max-width: 640px;
-  }
-
-  /* ── SKILLS ──────────────────────────────── */
-  .skills-grid {
+  /* ===== Hero ===== */
+  .hero {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    align-items: center;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
   }
-  .skill-group {}
-  .skill-group-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 0.3rem;
+  .avatar-wrap {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface-soft);
+    border: 4px solid #fff;
+    box-shadow: 0 1px 2px rgba(20,30,60,0.06), 0 10px 28px rgba(20,30,60,0.10);
+    flex-shrink: 0;
   }
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-    margin-top: 0.4rem;
-  }
-  .tag {
-    background: var(--tag-bg);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.70rem;
-    padding: 0.18rem 0.55rem;
-    color: var(--mid);
-    border: 1px solid var(--rule);
+  .avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  /* ── EXPERIENCE ──────────────────────────── */
-  .exp-list { display: flex; flex-direction: column; gap: 2rem; }
-  .exp-item {}
-  .exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-    margin-bottom: 0.15rem;
+  .hero-info h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 0 0 6px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
   }
-  .exp-role {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.05rem;
+  .hero-info .title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 21px;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+  .hero-info .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    letter-spacing: 0.005em;
+  }
+  .hero-info .location {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .contact-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  .contact-strip a { color: var(--ink-soft); }
+  .contact-strip a:hover { color: var(--accent); }
+  .contact-strip .sep { color: var(--border); }
+  .contact-strip .channel {
+    font-size: 12.5px;
+    color: var(--muted);
+    background: var(--surface-soft);
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-left: 6px;
+  }
+
+  /* ===== Section frame ===== */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin: 0 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: transparent; /* the underline of .section-title already serves */
+  }
+
+  /* ===== About ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 36px;
+    align-items: start;
+  }
+  .about-body {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .about-body p { margin: 0; }
+  @media (max-width: 720px) {
+    .about-grid { grid-template-columns: 1fr; gap: 26px; }
+  }
+
+  /* ===== LinkedIn slot (lives inside .about-grid as the right column) =====
+     Intentionally chrome-less: no background, border, or padding. LinkedIn's
+     iframe brings its own card visuals; the wrapper here is positional only.
+     The LinkedIn medium vertical badge iframe is 310 x 266; size the wrapper
+     to match and bleed past the section's right padding so the badge sits
+     flush at the right edge of the page container. */
+  #linkedin-snippet {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    justify-self: end;
+    width: 310px;
+    margin-right: -40px;
+  }
+  #linkedin-snippet .badge-base,
+  #linkedin-snippet .badge-base iframe {
+    display: block;
+    margin: 0;
+  }
+  @media (max-width: 760px) {
+    #cv { padding-right: 20px; }
+    #linkedin-snippet { margin-right: -20px; }
+  }
+  @media (max-width: 720px) {
+    #linkedin-snippet { justify-content: center; justify-self: center; width: 100%; max-width: 320px; margin-right: 0; }
+  }
+  .snippet-placeholder {
+    border: 1.5px dashed var(--border);
+    border-radius: 8px;
+    padding: 28px 22px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    background: var(--surface-soft);
+  }
+  .snippet-placeholder strong { color: var(--ink-soft); display: block; margin-bottom: 6px; font-weight: 600; }
+
+  /* Print/PDF-only LinkedIn card (hidden on screen) */
+  .linkedin-print-card { display: none; }
+  .linkedin-print-card .lpc-eyebrow {
+    font-family: var(--serif);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .linkedin-print-card .lpc-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
     color: var(--ink);
   }
-  .exp-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.70rem;
-    color: var(--mid);
-    letter-spacing: 0.04em;
-    white-space: nowrap;
+  .linkedin-print-card .lpc-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-top: 2px;
   }
-  .exp-company {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--accent);
-    margin-bottom: 0.6rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.03em;
+  .linkedin-print-card .lpc-url {
+    font-size: 13px;
+    color: var(--primary);
+    margin-top: 8px;
+    letter-spacing: 0.02em;
   }
-  .exp-bullets {
-    list-style: none;
+
+  /* ===== Languages ===== */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .lang-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .lang-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .lang-level {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+  .lang-card.is-highlight { border-left-color: var(--accent); }
+  .lang-card.is-highlight .lang-level { color: var(--accent); font-weight: 500; }
+
+  /* ===== Experience ===== */
+  .cluster {
+    margin-bottom: 36px;
+  }
+  .cluster:last-child { margin-bottom: 0; }
+  .cluster-header {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    margin: 44px 0 26px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border);
   }
-  .exp-bullets li {
-    font-size: 0.875rem;
-    color: #3a3835;
-    padding-left: 1rem;
+  .cluster:first-of-type .cluster-header { margin-top: 8px; }
+  .cluster-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: 0.005em;
+    line-height: 1.2;
+  }
+  .cluster-range {
+    font-family: var(--sans);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  /* Optional one-sentence intro that frames a grouped (parent) company before its nested roles. */
+  .role-lead {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 2px 0 16px;
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .role-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 26px 28px;
+    box-shadow: var(--shadow-sm);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .role-header {
+    margin-bottom: 14px;
+  }
+  .role-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .role-company {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .role-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+  .role-meta span { display: inline-flex; align-items: center; }
+  .role-meta span + span::before {
+    content: '·';
+    margin-right: 16px;
+    color: var(--border);
+  }
+
+  .role-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .role-bullets li {
     position: relative;
+    padding: 6px 0 6px 22px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .role-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 14px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+  }
+  .role-bullets li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .role-bullets ul.sub-list {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+  }
+  .role-bullets ul.sub-list li {
+    padding: 2px 0 2px 14px;
+    font-size: 13.5px;
+  }
+  .role-bullets ul.sub-list li::before {
+    width: 3px;
+    height: 3px;
+    background: var(--muted);
+    top: 13px;
+    left: 2px;
+  }
+
+  /* Grouped (parent) company with nested roles */
+  .role-card--grouped .nested-roles {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6px;
+  }
+  .nested-role {
+    padding: 18px 0 16px;
+    border-top: 1px solid var(--border-soft);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .nested-role:first-child {
+    border-top: none;
+    padding-top: 6px;
+  }
+  .nested-role:last-child {
+    padding-bottom: 2px;
+  }
+  .nested-role .role-title {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+  .nested-role .role-meta {
+    margin-bottom: 8px;
+  }
+
+  /* ===== Industries Served ===== */
+  .industries-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .industry-tag {
+    font-family: var(--serif);
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 999px;
+    letter-spacing: 0.005em;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ===== Selected Outcomes ===== */
+  .outcome-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .outcome-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    box-shadow: var(--shadow-sm);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .outcome-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .outcome-context {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 0 0 14px;
+    letter-spacing: 0.02em;
+  }
+  .outcome-row {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    gap: 14px;
+    padding: 6px 0;
+    font-size: 14.5px;
+    color: var(--ink-soft);
     line-height: 1.55;
   }
-  .exp-bullets li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.75rem;
-    top: 0.05em;
+  .outcome-row + .outcome-row {
+    border-top: 1px solid var(--border-soft);
+    margin-top: 0;
   }
-  .exp-tech {
-    margin-top: 0.6rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-  }
-  .exp-divider {
-    height: 1px;
-    background: var(--rule);
-    margin: 1rem 0 0;
-    opacity: 0.5;
-  }
-
-  /* ── PROJECTS ────────────────────────────── */
-  .project-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  .project-card {
-    background: var(--accent-light);
-    border: 1px solid var(--rule);
-    padding: 1rem 1.1rem;
-  }
-  .project-card h4 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 0.95rem;
-    margin-bottom: 0.35rem;
-    color: var(--ink);
-  }
-  .project-card p {
-    font-size: 0.8rem;
-    color: var(--mid);
-    line-height: 1.5;
-    margin-bottom: 0.5rem;
-  }
-
-  /* ── CONTACT ─────────────────────────────── */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem 2rem;
-  }
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-  }
-  .contact-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
+  .outcome-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
     text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 0.1rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    padding-top: 5px;
   }
-  .contact-val {
-    font-size: 0.9rem;
-    color: var(--ink);
-  }
-
-  /* ── FOOTER ──────────────────────────────── */
-  footer {
-    text-align: center;
-    padding: 1.5rem 0;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    color: var(--mid);
-  }
-
-  /* ── PRINT ───────────────────────────────── */
-  @media print {
-    @page { margin: 1.5cm 1.8cm; size: A4; }
-    nav, .nav-print, footer { display: none !important; }
-    body { background: #fff; font-size: 11pt; }
-    :root { --paper: #fff; --accent-light: #fdf0ed; }
-    #hero { padding-top: 0; }
-    section { page-break-inside: avoid; }
-    .exp-item { page-break-inside: avoid; }
-    .project-grid { grid-template-columns: 1fr 1fr; }
-    a { color: inherit !important; }
-  }
-
   @media (max-width: 600px) {
-    #hero { grid-template-columns: 1fr; }
-    .avatar-wrap { display: none; }
-    .project-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
+    .outcome-row { grid-template-columns: 1fr; gap: 2px; padding: 8px 0; }
+    .outcome-label { padding-top: 0; }
+  }
+
+  /* ===== Languages & Geographic Reach ===== */
+  .reach-line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 0 0 18px;
+    max-width: 820px;
+  }
+
+  /* ===== Call to Action ===== */
+  .cta {
+    margin: 8px 0 16px;
+    padding: 36px 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .cta-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.45;
+    margin: 0 auto 20px;
+    max-width: 680px;
+  }
+  .cta-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  .cta-link {
+    color: var(--primary);
+    font-weight: 600;
+    border-bottom: 1px solid var(--accent-soft);
+    padding-bottom: 3px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .cta-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .cta-sep {
+    color: var(--border);
+    letter-spacing: 0;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+  .footer a { color: var(--muted); }
+  .footer a:hover { color: var(--accent); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 760px) {
+    #cv { padding: 28px 20px 32px; }
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 22px;
+    }
+    .avatar-wrap {
+      margin: 0 auto;
+      width: 200px;
+      height: 200px;
+    }
+    .hero-info h1 { font-size: 34px; }
+    .hero-info .title { font-size: 18px; }
+    .contact-strip { justify-content: center; }
+    .role-card { padding: 20px 18px; }
+    .role-title { font-size: 19px; }
+    .action-bar { top: 12px; right: 12px; }
+    .btn { padding: 8px 13px; font-size: 13px; }
+  }
+
+  /* ===== Print / PDF ===== */
+  @media print {
+    @page { size: A4; margin: 12mm 12mm; }
+    html, body { background: #fff !important; }
+    .no-print { display: none !important; }
+    #cv { padding: 0; max-width: none; }
+    .hero { padding-bottom: 22px; margin-bottom: 26px; }
+    .section { margin-bottom: 28px; }
+    .role-card, .nested-role, .lang-card, #linkedin-snippet {
+      box-shadow: none !important;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .role-card { padding: 16px 18px; }
+    .avatar-wrap { box-shadow: none; border-width: 2px; }
+    a { color: var(--ink) !important; border-bottom-color: transparent !important; }
+  }
+
+  /* Class applied during html2pdf export for fine-tuning */
+  body.pdf-export .action-bar { display: none !important; }
+  body.pdf-export #cv { padding: 18px 22px; }
+
+  /* Swap live LinkedIn badge for printable card when exporting / printing */
+  body.pdf-export #linkedin-snippet .badge-base,
+  body.pdf-export #linkedin-snippet > script { display: none !important; }
+  body.pdf-export .linkedin-print-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 16px 24px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-soft);
+    text-align: center;
+  }
+
+  @media print {
+    #linkedin-snippet .badge-base { display: none !important; }
+    .linkedin-print-card {
+      display: inline-flex !important;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 16px 24px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f5efe2;
+      text-align: center;
+    }
   }
 </style>
 </head>
+
 <body>
 
-<nav>
-  <div class="inner">
-    <span class="nav-name">Pavel Sazonov</span>
-    <ul class="nav-links">
-      <li><a href="#summary">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-print" onclick="window.print()">⎙ Print PDF</button>
-  </div>
-</nav>
-
-<div class="page">
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-text">
-      <p class="hero-eyebrow">Bar, Montenegro</p>
-      <h1>Pavel<br>Sazonov</h1>
-      <p class="hero-title">QA Engineer &amp; ML / NLP Data Scientist</p>
-      <div class="hero-contact">
-        <span><a href="mailto:sazonov.ps@gmail.com">sazonov.ps@gmail.com</a></span>
-        <span>+382 67 528400 (WhatsApp / Telegram)</span>
-        <span>Bar, Montenegro</span>
-      </div>
-    </div>
-    <div class="avatar-wrap">
-      <img src="ava.jpg" alt="Pavel Sazonov" style="width:100%;height:100%;object-fit:cover;">
-    </div>
-  </section>
-
-  <!-- SUMMARY -->
-  <section id="summary">
-    <p class="section-label">Profile</p>
-    <p>Senior QA Engineer and ML/NLP Data Scientist with over four years of combined experience in backend test automation, database quality assurance, and applied machine learning. Specialises in high-performance data platforms, distributed systems, and NLP pipelines. Proven track record across SaaS database products, media analytics, healthcare AI, and web-scale data engineering. Based in Montenegro; experienced working fully remote across multiple time zones.</p>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <p class="section-label">Core Skills</p>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-name">QA &amp; Testing</div>
-        <div class="skill-tags">
-          <span class="tag">PyTest</span>
-          <span class="tag">Test Automation</span>
-          <span class="tag">TDD</span>
-          <span class="tag">API Testing</span>
-          <span class="tag">SQL Engine QA</span>
-          <span class="tag">Regression Analysis</span>
-          <span class="tag">Performance Testing</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-name">Data &amp; ML</div>
-        <div class="skill-tags">
-          <span class="tag">NLP</span>
-          <span class="tag">Machine Learning</span>
-          <span class="tag">Scikit-learn</span>
-          <span class="tag">TensorFlow / Keras</span>
-          <span class="tag">CatBoost / XGBoost</span>
-          <span class="tag">spaCy / NLTK</span>
-          <span class="tag">Pandas / NumPy</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-name">Data Engineering</div>
-        <div class="skill-tags">
-          <span class="tag">Apache Iceberg</span>
-          <span class="tag">Apache Spark</span>
-          <span class="tag">SQL</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">SQLAlchemy</span>
-          <span class="tag">Weaviate</span>
-          <span class="tag">DuckDB</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-name">Infrastructure &amp; DevOps</div>
-        <div class="skill-tags">
-          <span class="tag">Kubernetes</span>
-          <span class="tag">Docker</span>
-          <span class="tag">AWS (EC2/S3/EKS)</span>
-          <span class="tag">Ansible</span>
-          <span class="tag">Kafka</span>
-          <span class="tag">Jenkins</span>
-          <span class="tag">Bash</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-name">Languages</div>
-        <div class="skill-tags">
-          <span class="tag">Python</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Bash</span>
-          <span class="tag">HTML / CSS</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-name">Tools &amp; Platforms</div>
-        <div class="skill-tags">
-          <span class="tag">GitHub</span>
-          <span class="tag">Jira / Confluence</span>
-          <span class="tag">Zabbix</span>
-          <span class="tag">REST APIs</span>
-          <span class="tag">Linux</span>
-          <span class="tag">FileMaker</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <p class="section-label">Experience</p>
-    <div class="exp-list">
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-role">QA Engineer</span>
-          <span class="exp-period">Dec 2024 – Present</span>
-        </div>
-        <div class="exp-company">Scailium (formerly SQream)</div>
-        <ul class="exp-bullets">
-          <li>Develop and maintain automated backend and database test suites using Python and PyTest within a proprietary testing framework.</li>
-          <li>Design detailed test plans for new features using TDD principles in direct collaboration with developers.</li>
-          <li>Perform backend, API, SQL engine, and ML/Data Science platform testing for a high-performance SaaS database product.</li>
-          <li>Debug complex test failures, investigate regressions, and monitor nightly runs to ensure release quality.</li>
-          <li>Validate integration of custom Data Science and machine learning models within the database ecosystem.</li>
-          <li>Review pull requests with quality-focused feedback on implementation, testability, and edge cases.</li>
-        </ul>
-        <div class="exp-tech">
-          <span class="tag">Python</span><span class="tag">PyTest</span><span class="tag">SQL</span>
-          <span class="tag">Apache Iceberg</span><span class="tag">Apache Spark</span><span class="tag">REST APIs</span>
-          <span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-role">SRE</span>
-          <span class="exp-period">Sep 2024 – Dec 2024</span>
-        </div>
-        <div class="exp-company">Qligent Corp. · Remote</div>
-        <ul class="exp-bullets">
-          <li>Site Reliability Engineering for broadcast monitoring infrastructure, managing Kubernetes-based deployments.</li>
-          <li>Worked with Apache Kafka event streaming and distributed systems observability.</li>
-        </ul>
-        <div class="exp-tech">
-          <span class="tag">Kubernetes</span><span class="tag">Kafka</span><span class="tag">SRE</span>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-role">QA Manager → QA Engineer</span>
-          <span class="exp-period">Jan 2023 – Sep 2024</span>
-        </div>
-        <div class="exp-company">Alar Studios · Budva, Montenegro</div>
-        <ul class="exp-bullets">
-          <li><strong>As QA Manager (Mar – Sep 2024):</strong> Led a team of QA engineers, oversaw test planning, execution and reporting, conducted technical interviews and onboarded new hires, reported directly to business owners.</li>
-          <li>Recreated client environments to test software stability and reproduce real-world load conditions for performance testing.</li>
-          <li><strong>As QA Engineer (Jan 2023 – Feb 2024):</strong> Automated testing for SQream — a GPU-accelerated RDBMS for big data analytics — covering fundamental algorithms, scalability, stability, and data structures.</li>
-        </ul>
-        <div class="exp-tech">
-          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Bash</span><span class="tag">Test Automation</span>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-role">ML &amp; NLP Data Scientist</span>
-          <span class="exp-period">Dec 2022 – Jan 2025</span>
-        </div>
-        <div class="exp-company">FindDataLab (Indext Data Lab) · Remote</div>
-        <ul class="exp-bullets">
-          <li>Large-scale Spanish-language database de-duplication using NLP and clustering techniques.</li>
-          <li>Trends extraction tool for an Australian media holding, leveraging spaCy and scikit-learn pipelines.</li>
-          <li>Personalised medication recommendation system for a medical institution using TensorFlow/Keras.</li>
-          <li>ChatGPT-powered PDF question-answering assistant built with Weaviate vector search and spaCy.</li>
-          <li>Predictive modelling for horse race outcomes using CatBoost with structured tabular data.</li>
-        </ul>
-        <div class="exp-tech">
-          <span class="tag">spaCy</span><span class="tag">NLTK</span><span class="tag">scikit-learn</span>
-          <span class="tag">TensorFlow</span><span class="tag">CatBoost</span><span class="tag">Weaviate</span>
-          <span class="tag">Pandas</span><span class="tag">SQLAlchemy</span>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-role">DevOps Engineer</span>
-          <span class="exp-period">Mar 2022 – Dec 2022</span>
-        </div>
-        <div class="exp-company">Alar Studios · Budva, Montenegro</div>
-        <ul class="exp-bullets">
-          <li>Maintained and modernised staging infrastructure; supported Dev and QA teams, authored documentation.</li>
-          <li>Managed AWS services (EC2, S3, EKS, CloudTrail, CloudWatch, VPC) and IaC with Ansible and CloudFormation.</li>
-          <li>Operated CI/CD pipelines with Jenkins; monitoring with Zabbix; containerisation with Kubernetes and Docker.</li>
-        </ul>
-        <div class="exp-tech">
-          <span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">AWS</span>
-          <span class="tag">Ansible</span><span class="tag">Jenkins</span><span class="tag">Bash</span><span class="tag">PostgreSQL</span>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-role">Data Engineer</span>
-          <span class="exp-period">Jul 2021 – Feb 2022</span>
-        </div>
-        <div class="exp-company">Alar Studios · Budva, Montenegro</div>
-        <ul class="exp-bullets">
-          <li>Backend data engineering for a B2B embeddable web application serving over 5 million users — a mental health assistance platform.</li>
-          <li>Designed and optimised database schemas, performed migrations, implemented reporting and refactored SQL functions.</li>
-        </ul>
-        <div class="exp-tech">
-          <span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">SQL</span>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-role">Freelance Data Scientist</span>
-          <span class="exp-period">Jun 2020 – Feb 2021</span>
-        </div>
-        <div class="exp-company">Self-employed · Cancún, Mexico</div>
-        <ul class="exp-bullets">
-          <li>Built web applications with Django; automation scripts with Selenium and BeautifulSoup; async API clients with aiohttp/asyncio.</li>
-          <li>Completed Data Analysis with Python (Computer Science Center) and Introduction to Data Analysis (Mail.ru Group).</li>
-        </ul>
-        <div class="exp-tech">
-          <span class="tag">Django</span><span class="tag">Selenium</span><span class="tag">Pandas</span>
-          <span class="tag">NumPy</span><span class="tag">matplotlib</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SELECTED PROJECTS -->
-  <section id="projects">
-    <p class="section-label">Selected Projects</p>
-    <div class="project-grid">
-      <div class="project-card">
-        <h4>PDF Q&amp;A Assistant</h4>
-        <p>ChatGPT-powered assistant that answers questions by searching information within PDF documents using vector search.</p>
-        <div class="exp-tech"><span class="tag">Weaviate</span><span class="tag">spaCy</span><span class="tag">SQLAlchemy</span></div>
-      </div>
-      <div class="project-card">
-        <h4>Medication Recommendation System</h4>
-        <p>Personalised recommendation engine for a medical institution, processing clinical text with deep learning.</p>
-        <div class="exp-tech"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">spaCy</span></div>
-      </div>
-      <div class="project-card">
-        <h4>Media Trends Extraction</h4>
-        <p>NLP pipeline for extracting trending topics from a large Australian media holding's content corpus.</p>
-        <div class="exp-tech"><span class="tag">spaCy</span><span class="tag">scikit-learn</span><span class="tag">Pandas</span></div>
-      </div>
-      <div class="project-card">
-        <h4>Order Management Database</h4>
-        <p>Custom database system for a high-volume e-commerce operation, reducing order-to-dispatch time from 4 months to 3 weeks for 70–100 daily orders.</p>
-        <div class="exp-tech"><span class="tag">FileMaker</span><span class="tag">Database Design</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="section-label">Contact</p>
-    <div class="contact-grid">
-      <div class="contact-item">
-        <span class="contact-label">Email</span>
-        <span class="contact-val"><a href="mailto:sazonov.ps@gmail.com">sazonov.ps@gmail.com</a></span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Phone / Messenger</span>
-        <span class="contact-val">+382 67 528400 (WhatsApp / Telegram)</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Location</span>
-        <span class="contact-val">Bar, Montenegro</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Availability</span>
-        <span class="contact-val">Open to remote opportunities globally</span>
-      </div>
-    </div>
-  </section>
-
+<!-- ====== Floating action bar (NOT included in PDF) ====== -->
+<div class="action-bar no-print" data-html2canvas-ignore="true">
+  <button class="btn" id="savePdfBtn" type="button" title="Save this page as a PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Save as PDF
+  </button>
 </div>
 
-<footer>
-  Pavel Sazonov &nbsp;·&nbsp; QA Engineer &amp; Data Scientist &nbsp;·&nbsp; Bar, Montenegro
-</footer>
+<main id="cv">
+
+  <!-- ====== HERO ====== -->
+  <header class="hero">
+    <div class="avatar-wrap">
+      <img src="photo.jpg" alt="Pavel Sazonov" />
+    </div>
+    <div class="hero-info">
+      <h1>Pavel Sazonov</h1>
+      <p class="title">Principal Business Architect &amp; Strategic Advisor</p>
+      <p class="tagline">I take the seat no one else is ready to take.</p>
+      <p class="location">Bar, Montenegro</p>
+      <div class="contact-strip">
+        <a href="mailto:work@1985.ps">work@1985.ps</a>
+        <span>+382 67 528400 <span class="channel">WhatsApp / Telegram</span></span>
+        <a href="https://www.linkedin.com/in/sazonovps/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== ABOUT + LINKEDIN (two-column on desktop, stacks on mobile) ====== -->
+  <section id="about" class="section">
+    <h2 class="section-title">About</h2>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>Business owners call me when they need order, when there is no room for hesitation and no fear of taking full ownership. In practice, I turn vague goals like &ldquo;improve efficiency&rdquo; or &ldquo;grow revenue&rdquo; into concrete initiatives, then break them down into priorities, dependencies, and a delivery roadmap. I arrive to spend time aligning different teams on what to build or change, defining how processes and systems should work together, and making sure strategic decisions can actually be implemented in real projects.</p>
+      </div>
+
+      <!--
+           ─────────────────────────────────────────────────────────────────────
+           LINKEDIN BADGE
+           If LinkedIn ever issues you a new snippet, replace the div + script
+           between the START and END markers below. The static "linkedin-print-card"
+           is what shows in the PDF (LinkedIn iframes can't be rasterized).
+           ─────────────────────────────────────────────────────────────────────
+      -->
+      <div id="linkedin-snippet">
+
+        <!-- ===== LINKEDIN SNIPPET START ===== -->
+        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="sazonovps" data-version="v1"></div>
+        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+
+        <a class="linkedin-print-card" href="https://www.linkedin.com/in/sazonovps/">
+          <span class="lpc-eyebrow">LinkedIn Profile</span>
+          <span class="lpc-name">Pavel Sazonov</span>
+          <span class="lpc-title">Principal Business Architect &amp; Strategic Advisor</span>
+          <span class="lpc-url">linkedin.com/in/sazonovps</span>
+        </a>
+        <!-- ===== LINKEDIN SNIPPET END ===== -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== INDUSTRIES SERVED ====== -->
+  <section id="industries" class="section">
+    <h2 class="section-title">Industries Served</h2>
+    <div class="industries-strip">
+      <span class="industry-tag">Hospitality &amp; Tourism</span>
+      <span class="industry-tag">Healthcare</span>
+      <span class="industry-tag">E-commerce &amp; Logistics</span>
+      <span class="industry-tag">Satellite Telecom</span>
+      <span class="industry-tag">SaaS &amp; GPU Database Platforms</span>
+      <span class="industry-tag">ML / NLP / Generative AI</span>
+      <span class="industry-tag">Media Monitoring</span>
+    </div>
+  </section>
+
+  <!-- ====== SELECTED OUTCOMES ====== -->
+  <section id="outcomes" class="section">
+    <h2 class="section-title">Selected Outcomes</h2>
+    <div class="outcome-grid">
+
+      <article class="outcome-card">
+        <h3 class="outcome-title">Shipping turnaround at a global art-logistics company</h3>
+        <p class="outcome-context">Leonid Afremov LTD · 2016 – 2017 · Playa del Carmen, Mexico</p>
+        <div class="outcome-row">
+          <span class="outcome-label">Problem</span>
+          <span>A four-month shipping backlog where every customer order was overdue and untraceable. 100–150 originals per day kept entering a pipeline no one could see into.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Move</span>
+          <span>Diagnosed the root cause as visibility, not capacity. Built a custom order-monitoring database from scratch to track and visually surface the state of every shipment end to end.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Result</span>
+          <span>Dispatch dropped from 4 months to 3 weeks — effectively the irreducible floor: the time it takes to paint and pack a Leonid Afremov original. Volume held at 100–150 orders/day throughout the fix.</span>
+        </div>
+      </article>
+
+      <article class="outcome-card">
+        <h3 class="outcome-title">Audit that turned into a 6-month turnaround</h3>
+        <p class="outcome-context">Travel Service Mexico · 2018 – 2020 · Executive Director</p>
+        <div class="outcome-row">
+          <span class="outcome-label">Problem</span>
+          <span>The Dominican Republic head office needed a verdict on the Mexico branch — shut it down, or prove it could stand on its own.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Move</span>
+          <span>The owners hand-picked me, on the strength of years of personal trust, to fly in and rule on it. I converted the audit mandate into an active restructuring program: licenses, contracts, accounting, owner-facing reporting.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Result</span>
+          <span>Every restructuring goal completed in 6 months against a 12-month target. Modernized internal communications and renegotiated provider agreements to materially better terms.</span>
+        </div>
+      </article>
+
+      <article class="outcome-card">
+        <h3 class="outcome-title">New destination launched from zero, under pressure</h3>
+        <p class="outcome-context">Travel Service Mexico · 2011 – 2013 · Head of Operations (Market Launch)</p>
+        <div class="outcome-row">
+          <span class="outcome-label">Problem</span>
+          <span>The owners needed a brand-new regional destination opened — fast, with high commercial stakes, by someone they could trust completely on the ground.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Move</span>
+          <span>Relocated from the Dominican Republic operation to stand up the new branch end to end. Built every transport and excursion system from scratch and signed key suppliers across the full price spectrum — from standard transport to yachts, helicopters, and armored vehicles for VIP service.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Result</span>
+          <span>A fast-scaling operation handling a growing volume of international tourists — and the foundation of personal trust that the owners would draw on years later when they sent me to audit the same branch as Executive Director.</span>
+        </div>
+      </article>
+
+      <article class="outcome-card">
+        <h3 class="outcome-title">Direct headhunt after a partner shutdown</h3>
+        <p class="outcome-context">SCAILIUM (formerly SQream) · 2024 – present · Contract</p>
+        <div class="outcome-row">
+          <span class="outcome-label">Problem</span>
+          <span>SCAILIUM's contract with Alar Studios had ended and Alar shut down. They needed someone who already knew their GPU-database platform deeply enough to keep validation moving without a rebuild.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Move</span>
+          <span>SCAILIUM tracked me down and contracted me directly, based on the year I had been their lead QA inside Alar's delivery on the same product.</span>
+        </div>
+        <div class="outcome-row">
+          <span class="outcome-label">Result</span>
+          <span>A trust-based engagement, signed personally rather than through a procurement process — evidence that on this work, the relationship is identified with the person, not the firm.</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ====== LANGUAGES & GEOGRAPHIC REACH ====== -->
+  <section id="languages" class="section">
+    <h2 class="section-title">Languages &amp; Geographic Reach</h2>
+    <p class="reach-line">Delivered work across Mexico, the Dominican Republic, Israel, Australia, Russia, Montenegro, and Serbia. Based in Bar, Montenegro — remote-first.</p>
+    <div class="lang-grid">
+      <div class="lang-card is-highlight">
+        <p class="lang-name">English</p>
+        <p class="lang-level">Professional working proficiency</p>
+      </div>
+      <div class="lang-card is-highlight">
+        <p class="lang-name">Spanish</p>
+        <p class="lang-level">Professional working proficiency</p>
+      </div>
+      <div class="lang-card">
+        <p class="lang-name">Serbian</p>
+        <p class="lang-level">Limited working proficiency</p>
+      </div>
+      <div class="lang-card">
+        <p class="lang-name">German</p>
+        <p class="lang-level">Elementary proficiency</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== EXPERIENCE ====== -->
+  <section id="experience" class="section">
+    <h2 class="section-title">Experience</h2>
+
+    <!-- ============ CLUSTER 1: LEADERSHIP & OPERATIONS ============ -->
+    <div class="cluster">
+      <header class="cluster-header">
+        <h3 class="cluster-title">Leadership &amp; Operations</h3>
+        <span class="cluster-range">2008 – present</span>
+      </header>
+      <div class="experience-list">
+
+        <!-- Alar Studios — Delivery Manager (leadership culmination of the Alar arc) -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Delivery Manager</h3>
+            <p class="role-company">Alar Studios · Full-time</p>
+            <p class="role-meta">
+              <span>Mar 2024 – Sep 2024 · 7 mos</span>
+              <span>Budva, Montenegro · On-site</span>
+            </p>
+          </header>
+          <p class="role-lead">The leadership outcome of a three-year internal climb at Alar Studios — from Data Engineer through DevOps and QA (those roles appear under Engineering &amp; Data). Promoted to run the dedicated department that worked exclusively with the SQream client.</p>
+          <ul class="role-bullets">
+            <li><strong>Took the SQream-dedicated department.</strong> Cross-functional team of developers and QA engineers focused exclusively on the SQream client engagement.</li>
+            <li><strong>End-to-end ownership.</strong> Test planning, development oversight, release, and direct reporting to business owners; recreated complex client environments to validate stability under extreme real-world load.</li>
+            <li><strong>Built the team.</strong> Directed hiring and onboarding for both developers and testers, evaluating candidates against the bar the SQream engagement required.</li>
+          </ul>
+        </article>
+
+        <!-- 6. Travel Service Mexico — Executive Director -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Executive Director</h3>
+            <p class="role-company">Travel Service Mexico · Full-time</p>
+            <p class="role-meta">
+              <span>Dec 2018 – Jan 2020 · 1 yr 2 mos</span>
+              <span>Mexico</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Called back to rule on the branch.</strong> The Dominican Republic head office sent me into the Mexico operation personally — based on years of earned trust — with a clear mandate: audit it, then decide whether to shut it down or prove it could stand on its own.</li>
+            <li><strong>The audit became a turnaround.</strong> Completed every restructuring goal in 6 months against a 12-month target — license renewals, contract renegotiations, accounting rebuilt from scratch, transparent reporting flowing back to the owners.</li>
+            <li><strong>Modernized the operation.</strong> Slack for internal communications; renegotiated every provider agreement to materially better commercial terms.</li>
+          </ul>
+        </article>
+
+        <!-- 7. StarGo Mexico -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Official Satellite Internet Distributor</h3>
+            <p class="role-company">StarGo Mexico · Self-employed</p>
+            <p class="role-meta">
+              <span>Sep 2017 – Nov 2018 · 1 yr 3 mos</span>
+              <span>Quintana Roo, Mexico</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Owned the entire customer relationship.</strong> Discovered the need, built the trust, signed the contract, performed the install, maintained the connection — all five touchpoints, one person.</li>
+            <li><strong>Full-cycle sales and field operations.</strong> Client acquisition for satellite internet services across Quintana Roo, including logistical scheduling of every install and service visit.</li>
+            <li><strong>Built the back office.</strong> Designed and implemented a custom FileMaker document-management system to automate the internal workflows the business depended on.</li>
+          </ul>
+        </article>
+
+        <!-- 8. Leonid Afremov LTD -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Head of Shipping Department</h3>
+            <p class="role-company">Leonid Afremov LTD · Full-time</p>
+            <p class="role-meta">
+              <span>Nov 2016 – Aug 2017 · 10 mos</span>
+              <span>Playa del Carmen, Mexico</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Diagnosed the real problem.</strong> Inherited a shipping backlog where customer delays had reached four months. The root cause wasn't capacity — it was visibility. No one could see the state of any order at any moment.</li>
+            <li><strong>Built the monitoring system.</strong> Created a custom order-management database from scratch to track and visually monitor every shipment end-to-end, replacing the failing manual processes that had let the backlog form.</li>
+            <li><strong>Dropped delays from 4 months to 3 weeks.</strong> Effectively the irreducible floor — the time it takes to paint and pack a Leonid Afremov original. Volume during the fix: 100–150 orders per day.</li>
+            <li><strong>Personally handled the highest-value shipments</strong> — complex international orders where premium service quality mattered most.</li>
+          </ul>
+        </article>
+
+        <!-- 9. TCMS Group -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Technical Director</h3>
+            <p class="role-company">TCMS Group · Full-time</p>
+            <p class="role-meta">
+              <span>Jan 2014 – Oct 2015 · 1 yr 10 mos</span>
+              <span>Mexico</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Spotted the visibility gap.</strong> The company was running cross-border medical operations across Mexico and the Dominican Republic without a unified view of cases, payments, reports, or document flow — everything lived on paper and in scattered files.</li>
+            <li><strong>Built the CRM that fixed it.</strong> Designed and implemented a FileMaker-based system from scratch that centralized case tracking, payments, instant PDF report generation, and document flow for both countries on a single source of truth.</li>
+            <li><strong>Held the human side at the same time.</strong> Coordinated communication between international clients and healthcare providers in emergency situations, on top of the system work.</li>
+          </ul>
+        </article>
+
+        <!-- 10. Travel Service Mexico — Head of Operations -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Head of Operations (Market Launch)</h3>
+            <p class="role-company">Travel Service Mexico · Full-time</p>
+            <p class="role-meta">
+              <span>Sep 2011 – Jul 2013 · 1 yr 11 mos</span>
+              <span>Mexico</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Hand-picked to relocate and launch.</strong> The owners chose me, from the Dominican Republic operation, to fly into Mexico and stand up a brand-new regional destination from zero — a transfer of trust under real commercial stakes and high pressure.</li>
+            <li><strong>Built every system from scratch.</strong> Transport and excursion logistics across the new branch; signed key suppliers across the full price spectrum — standard transport, yachts, helicopters, armored vehicles for VIPs.</li>
+            <li><strong>Scaled the launch into a real operation</strong> handling a fast-growing volume of international tourists before handing the matured branch off.</li>
+          </ul>
+        </article>
+
+        <!-- 11. Travel Service Dominicana -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Head of Operations</h3>
+            <p class="role-company">Travel Service Dominicana · Full-time</p>
+            <p class="role-meta">
+              <span>Feb 2008 – Aug 2011 · 3 yrs 7 mos</span>
+              <span>La Altagracia, Dominican Republic</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>National-scale operations.</strong> Directed booking, excursion scheduling, and end-to-end airport–hotel transfer logistics across the country's tourist flow.</li>
+            <li><strong>Replaced Excel with a real database.</strong> Spearheaded the transition from MS Excel to a custom-built FileMaker database that automated guest tracking — hotels, excursions, arrivals and departures — for the entire national tourist flow.</li>
+            <li><strong>The foundation that made the Mexico launch possible.</strong> The digital and operational discipline established here is what the owners would draw on two years later when they sent me to open the new market.</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ============ CLUSTER 2: ENGINEERING & DATA ============ -->
+    <div class="cluster">
+      <header class="cluster-header">
+        <h3 class="cluster-title">Engineering &amp; Data</h3>
+        <span class="cluster-range">2020 – present</span>
+      </header>
+      <div class="experience-list">
+
+        <!-- 1. SCAILIUM -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Quality Assurance Engineer / Data Science Engineer</h3>
+            <p class="role-company">SCAILIUM (formerly SQream) · Contract</p>
+            <p class="role-meta">
+              <span>Dec 2024 – Apr 2026 · 1 yr 5 mos</span>
+              <span>Israel · Remote</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Sought out and signed directly.</strong> When SCAILIUM's contract with Alar Studios ended and Alar shut down, SCAILIUM tracked me down and contracted me personally — the trust they placed was built during the year I had been their lead QA on the GPU-database project, not on any introduction.</li>
+            <li><strong>Rare dual background put to work.</strong> Bring both Quality Assurance and Data Science to validate their high-performance SaaS GPU-database end-to-end: SQL engine, APIs, and ML/Data Science platforms at massive scale.</li>
+            <li><strong>ML inside the database.</strong> Lead validation and integration of custom Machine Learning models embedded directly in the database ecosystem; maintain complex backend and database test suites in Python and PyTest within their proprietary framework, in TDD partnership with the dev team.</li>
+          </ul>
+        </article>
+
+        <!-- 2. FindDataLab -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">ML and NLP Data Scientist</h3>
+            <p class="role-company">FindDataLab – Web Scraping Service (Concurrent Engagement) · Full-time</p>
+            <p class="role-meta">
+              <span>Dec 2022 – Jan 2025 · 2 yrs 2 mos</span>
+              <span>Serbia · Remote</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Bridge between business and engineering.</strong> Sat with clients, translated raw business ideas into concrete delivery briefs for the engineering team, then shipped finished, high-quality products against those briefs.</li>
+            <li><strong>Range of delivered products.</strong> NLP-based de-duplication of a massive Spanish-language database (NLTK, scikit-learn, SQLAlchemy); automated trends-extraction system for a major Australian media holding (spaCy, scikit-learn); personalized medication recommendation system for a healthcare institution (TensorFlow, Keras, spaCy).</li>
+            <li><strong>LLM and predictive work.</strong> Designed a ChatGPT-based assistant with RAG over Weaviate to extract answers from PDF documents; built a high-performance horse-race prediction model using CatBoost on data scraped via lxml.</li>
+          </ul>
+        </article>
+
+        <!-- 3. Qligent -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">SRE (Site Reliability Engineer)</h3>
+            <p class="role-company">Qligent Corp. (Parallel Engagement) · Full-time</p>
+            <p class="role-meta">
+              <span>Sep 2024 – Dec 2024 · 4 mos</span>
+              <span>Bar, Montenegro · Remote</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>High-availability media infrastructure.</strong> Managed Kubernetes and Apache Kafka in production supporting media monitoring systems, as a parallel full-time engagement.</li>
+            <li><strong>Cleared probation, continued in the role.</strong> Position ended due to a strategic company downsizing and a freeze on the planned expansion department.</li>
+          </ul>
+        </article>
+
+        <!-- 4. Alar Studios (parent + 3 engineering sub-roles; the Delivery Manager role is in Leadership & Operations) -->
+        <article class="role-card role-card--grouped">
+          <header class="role-header">
+            <h3 class="role-title">Alar Studios</h3>
+            <p class="role-company">Full-time · 2 yrs 8 mos</p>
+            <p class="role-meta">
+              <span>Jul 2021 – Feb 2024</span>
+              <span>Budva, Montenegro · On-site</span>
+            </p>
+          </header>
+
+          <p class="role-lead">Joined as a Data Engineer in 2021 and worked through three technical roles in two and a half years. Each opening was a seat no one else was ready to take — I stepped in with a Master's in Electronic Engineering (rather than Computer Science) and sometimes without the textbook experience for the role, and delivered each time. The leadership role that followed (Delivery Manager, 2024) appears under Leadership &amp; Operations.</p>
+
+          <div class="nested-roles">
+
+            <article class="nested-role">
+              <h4 class="role-title">Quality Assurance Engineer (SQream GPU Database Project)</h4>
+              <p class="role-meta"><span>Jan 2023 – Feb 2024 · 1 yr 2 mos</span></p>
+              <ul class="role-bullets">
+                <li><strong>Selected to lead testing on SQream</strong> — an RDBMS that runs on NVIDIA GPUs for big-data analytics — a product requiring extreme accuracy on massive datasets.</li>
+                <li><strong>Full testing surface.</strong> Manual, automated, regression and stress testing of fundamental algorithms; automation in Python, SQL, and Bash to validate GPU-accelerated computing.</li>
+              </ul>
+            </article>
+
+            <article class="nested-role">
+              <h4 class="role-title">DevOps Engineer</h4>
+              <p class="role-meta"><span>Mar 2022 – Dec 2022 · 10 mos</span></p>
+              <ul class="role-bullets">
+                <li><strong>Owned staging-environment maintenance, monitoring, and support</strong> on AWS (EC2, S3, EKS), Kubernetes, and Docker.</li>
+                <li><strong>Infrastructure as Code and pipelines.</strong> Standardized environment deployments with Ansible and CloudFormation; optimized delivery pipelines with Jenkins; established comprehensive monitoring with Zabbix.</li>
+              </ul>
+            </article>
+
+            <article class="nested-role">
+              <h4 class="role-title">Data Engineer</h4>
+              <p class="role-meta"><span>Jul 2021 – Feb 2022 · 8 mos</span></p>
+              <ul class="role-bullets">
+                <li><strong>Joined as a Data Engineer</strong> on a B2B mental-health web application serving over 5 million users.</li>
+                <li><strong>PostgreSQL at scale.</strong> Design optimization, migration, and refactoring of complex SQL functions; engineered reporting systems and improved data integrity to support critical application features.</li>
+              </ul>
+            </article>
+
+          </div>
+        </article>
+
+        <!-- 5. Self-employed Data Scientist -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Data Scientist (Career Transition)</h3>
+            <p class="role-company">Self-employed</p>
+            <p class="role-meta">
+              <span>Jun 2020 – Feb 2021 · 9 mos</span>
+              <span>Cancún, Quintana Roo, Mexico · Remote</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>Read the market and moved.</strong> COVID was breaking the in-person businesses I had been running while remote work was the only thing still alive. Made a deliberate decision to re-skill into IT to stay in the market — and stay relevant for the next decade.</li>
+            <li><strong>Self-directed education.</strong> Advanced coursework in Data Analysis (SkillFactory, Computer Science Center, Mail.ru Group); built foundational neural networks in Python; certified Python Basic (HackerRank) and Data Analysis (CSC).</li>
+            <li><strong>Shippable evidence in parallel.</strong> Django + SQLAlchemy web applications; async API integrations with asyncio, aiohttp, and requests; web scrapers with Selenium and BeautifulSoup. Within a year of starting the transition, entered Alar Studios as a Data Engineer.</li>
+            <li>
+              <strong>Stack at exit of transition:</strong>
+              <ul class="sub-list">
+                <li><em>Languages &amp; Tools:</em> Python, SQL, HTML/CSS, GitHub.</li>
+                <li><em>Libraries:</em> NumPy, Pandas, Matplotlib, Django, SQLAlchemy, Aiohttp.</li>
+                <li><em>Certifications:</em> Python Basic (HackerRank), Data Analysis (CSC).</li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ============ CLUSTER 3: FOUNDATIONS ============ -->
+    <div class="cluster">
+      <header class="cluster-header">
+        <h3 class="cluster-title">Foundations</h3>
+        <span class="cluster-range">2002 – 2008</span>
+      </header>
+      <div class="experience-list">
+
+        <!-- Master's degree + research internship -->
+        <article class="role-card">
+          <header class="role-header">
+            <h3 class="role-title">Master's degree in Electronic Engineering</h3>
+            <p class="role-company">Graduation research &amp; thesis at the Institute of Applied Astronomy, Academy of Sciences</p>
+            <p class="role-meta">
+              <span>Sep 2002 – Feb 2008 · 5 yrs 6 mo</span>
+            </p>
+          </header>
+          <ul class="role-bullets">
+            <li><strong>First year:</strong> hands-on research and practical training at the Institute of Applied Astronomy (RAS).</li>
+            <li><strong>Second year:</strong> developed and authored the graduation thesis grounded in that research.</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====== CALL TO ACTION ====== -->
+  <aside class="cta">
+    <p class="cta-text">If you have a goal you can't yet describe as a plan, that's the conversation I help with.</p>
+    <div class="cta-actions">
+      <a class="cta-link" href="mailto:work@1985.ps">work@1985.ps</a>
+      <span class="cta-sep">·</span>
+      <a class="cta-link" href="https://www.linkedin.com/in/sazonovps/" target="_blank" rel="noopener">LinkedIn profile</a>
+    </div>
+  </aside>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <p>Pavel Sazonov · Bar, Montenegro · <a href="mailto:work@1985.ps">work@1985.ps</a> · +382&nbsp;67&nbsp;528400 (WhatsApp / Telegram)</p>
+  </footer>
+
+</main>
+
+<!-- html2pdf.js bundled (loaded async; button stays usable if it loads) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+
+<script>
+  (function () {
+    const btn = document.getElementById('savePdfBtn');
+    if (!btn) return;
+
+    btn.addEventListener('click', async function () {
+      const target = document.getElementById('cv');
+      if (!target) return;
+
+      // Make sure custom web fonts are loaded before rasterizing.
+      try { if (document.fonts && document.fonts.ready) { await document.fonts.ready; } } catch (_) {}
+
+      // Prefer html2pdf when available, otherwise fall back to print().
+      if (typeof window.html2pdf === 'function') {
+        document.body.classList.add('pdf-export');
+        const previousLabel = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = 'Generating…';
+
+        const opt = {
+          margin:       [10, 10, 10, 10],
+          filename:     'Pavel_Sazonov_CV.pdf',
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#f8f5ee', windowWidth: target.scrollWidth },
+          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+          pagebreak:    { mode: ['css', 'legacy'], avoid: ['.role-card', '.nested-role', '.lang-card'] }
+        };
+
+        try {
+          await window.html2pdf().set(opt).from(target).save();
+        } catch (err) {
+          console.error('PDF export failed, falling back to print dialog.', err);
+          window.print();
+        } finally {
+          document.body.classList.remove('pdf-export');
+          btn.innerHTML = previousLabel;
+          btn.disabled = false;
+        }
+      } else {
+        window.print();
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
